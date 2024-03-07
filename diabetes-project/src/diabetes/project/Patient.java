@@ -7,7 +7,6 @@ package diabetes.project;
 
 import java.util.ArrayList;
 import java.util.Set;
-import diabetes.project.Disease;
 import java.util.HashSet;
 import diabetes.project.Treatment;
 
@@ -20,7 +19,7 @@ public class Patient {
     private int typeOfDiabetes;
     private double bmi;
     private int age;
-    private String insulinProd;
+    private int insulinProd; //1= NO PROD; 2= HYPO; 3= NORMAL; 4=HYPER
     private boolean insulinRes;
     private boolean hypotension;
     private boolean dyslipidemia;
@@ -28,6 +27,11 @@ public class Patient {
     private boolean nafld;
     private boolean osteoporosis;
     private Set<Treatment> treatments = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Patient{" + "name=" + name + ", treatments=" + treatments + '}';
+    }
     
     public void applyTreatment(String name, boolean shouldBeApplied, double priority){
        Treatment treatment = new Treatment(name, shouldBeApplied, priority);
@@ -54,7 +58,7 @@ public class Patient {
         this.age = age;
     }
 
-    public void setInsulinProd(String insulinProd) {
+    public void setInsulinProd(int insulinProd) {
         this.insulinProd = insulinProd;
     }
 
@@ -102,7 +106,7 @@ public class Patient {
         return age;
     }
 
-    public String getInsulinProd() {
+    public int getInsulinProd() {
         return insulinProd;
     }
 
@@ -134,7 +138,7 @@ public class Patient {
         return treatments;
     }
 
-    public Patient(String name, int typeOfDiabetes, double bmi, int age, String insulinProd, boolean insulinRes, boolean hypotension, boolean dyslipidemia, boolean pad, boolean nafld, boolean osteoporosis) {
+    public Patient(String name, int typeOfDiabetes, double bmi, int age, int insulinProd, boolean insulinRes, boolean hypotension, boolean dyslipidemia, boolean pad, boolean nafld, boolean osteoporosis) {
         this.name = name;
         this.typeOfDiabetes = typeOfDiabetes;
         this.bmi = bmi;

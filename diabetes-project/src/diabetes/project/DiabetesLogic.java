@@ -35,7 +35,7 @@ public class DiabetesLogic {
       
         
         
-        Patient loredana = new Patient("Lore", 1, 26.8, 23, "no", false, false, true, true, false, false);
+        Patient loredana = new Patient("Lore", 1, 26.8, 23, 1 , false, false, true, true, false, false);
         
         
         
