@@ -15,7 +15,7 @@ import org.kie.api.runtime.KieContainer;
  * @author beatr
  */
 
-public class TestRules {
+public class PatientTest {
 
     @Test
     public void testInsulin1Rule() {
