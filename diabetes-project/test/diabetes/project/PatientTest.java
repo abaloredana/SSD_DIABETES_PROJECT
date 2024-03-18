@@ -5,6 +5,7 @@
 package diabetes.project;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.KieServices;
@@ -18,7 +19,7 @@ import org.kie.api.runtime.KieContainer;
 public class PatientTest {
 
     @Test
-    public void testInsulin1Rule() {
+    public void testPatient1InsulinRule() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
@@ -32,11 +33,11 @@ public class PatientTest {
         assertEquals(1, patient.getTreatments().size());
         assertEquals("Insulin", patient.getTreatments().iterator().next().getName());
         
-        System.out.println("Test testInsulin1Rule is correct.");
+        System.out.println("Test testPatient1InsulinRule is correct.");
     }
 
     @Test
-    public void testInsulin2Rule() {
+    public void testPatient2InsulinRule() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
@@ -50,16 +51,16 @@ public class PatientTest {
         assertEquals(1, patient.getTreatments().size());
         assertEquals("Insulin", patient.getTreatments().iterator().next().getName());
         
-        System.out.println("Test testInsulin2Rule is correct.");
+        System.out.println("Test testPatient2InsulinRule is correct.");
     }
     
     @Test
-    public void testMetformin1Rule() {
+    public void testPatient3Metformin1Rule() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
 
-        Patient patient = new Patient("Patient4", 1, 25, 23, 3, false, false, true, true, false, false);
+        Patient patient = new Patient("Patient3", 1, 25, 23, 3, false, false, true, true, false, false);
         ksession.insert(patient);
         int firedRules = ksession.fireAllRules();
         ksession.dispose();
@@ -68,11 +69,11 @@ public class PatientTest {
         assertEquals(1, patient.getTreatments().size());
         assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
         
-        System.out.println("Test testMetformin1Rule is correct.");
+        System.out.println("Test testPatient3Metformin1Rule is correct.");
     }
 
 @Test
-    public void testMetformin2Rule() {
+    public void testPatient4Metformin2Rule() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
@@ -86,11 +87,11 @@ public class PatientTest {
         assertEquals(1, patient.getTreatments().size());
         assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
         
-        System.out.println("Test testMetformin2Rule is correct.");
+        System.out.println("Test testPatient4Metformin2Rule is correct.");
     }
 
 @Test
-    public void testMetformin3Rule() {
+    public void testPatient5() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
@@ -100,15 +101,24 @@ public class PatientTest {
         int firedRules = ksession.fireAllRules();
         ksession.dispose();
 
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testMetformin3Rule is correct.");
+        assertEquals(11, firedRules);
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Metformin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Sitagliptin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Saxagliptin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Linagliptin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Dulaglutide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Exenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Lixisenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Semaglutide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Glimepiride")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Glipizide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Glyburide")));
+
+        System.out.println("Test testPatient5 is correct.");
     }
 
     @Test
-    public void testMetformin4Rule() {
+    public void testPatient6Rule() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
@@ -118,406 +128,61 @@ public class PatientTest {
         int firedRules = ksession.fireAllRules();
         ksession.dispose();
 
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals(8, firedRules);
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Metformin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Dulaglutide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Exenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Lixisenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Semaglutide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Bexagliflozin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Canagliflozin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Dapagliflozin")));
         
-        System.out.println("Test testMetformin4Rule is correct.");
-    }
-
-    @Test
-    public void testSitagliptin1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient7", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Sitagliptin", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testSitagliptin1Rule is correct.");
+        System.out.println("Test testPatient6Rule is correct.");
     }
     
     @Test
-    public void testSaxagliptin1Rule() {
+    public void testPatient7Rule() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
 
-        Patient patient = new Patient("Patient8", 2, 25, 23, 3, false, false, true, true, false, false);
+        Patient patient = new Patient("Patient7", 2, 25, 23, 2, false, false, true, true, false, false);
         ksession.insert(patient);
         int firedRules = ksession.fireAllRules();
         ksession.dispose();
 
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Saxagliptin", patient.getTreatments().iterator().next().getName());
+        assertEquals(4, firedRules);
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Insulin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Glimepiride")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Glipizide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Glyburide")));
         
-        System.out.println("Test testSaxagliptin1Rule is correct.");
+        System.out.println("Test testPatient7Rule is correct.");
     }
     
     @Test
-    public void testLinagliptin1Rule() {
+    public void testPatient8Rule() {
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
 
-        Patient patient = new Patient("Patient9", 2, 25, 23, 3, false, false, true, true, false, false);
+        Patient patient = new Patient("Patient8", 2, 24, 23, 4, false, false, false, true, false, false);
         ksession.insert(patient);
         int firedRules = ksession.fireAllRules();
         ksession.dispose();
 
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Linagliptin", patient.getTreatments().iterator().next().getName());
+        assertEquals(9, firedRules);
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Metformin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Dulaglutide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Exenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Lixisenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Bexagliflozin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Canagliflozin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Dapagliflozin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Rosiglitazone")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Pioglitazone")));
         
-        System.out.println("Test testLinagliptin1Rule is correct.");
-    }
-    
-    @Test
-    public void testDulaglutide1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient10", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Dulaglutide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testDulaglutide1Rule is correct.");
-    }
-    
-    @Test
-    public void testDulaglutide2Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient11", 2, 25, 23, 4, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Dulaglutide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testDulaglutide2Rule is correct.");
-    }
-    
-    @Test
-    public void testExenatide1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient12", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Exenatide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testExenatide1Rule is correct.");
-    }
-    
-    @Test
-    public void testExenatide2Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient13", 2, 25, 23, 4, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Exenatide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testExenatide2Rule is correct.");
-    }
-    
-    @Test
-    public void testLixisenatide1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient14", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Lixisenatide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testLixisenatide1Rule is correct.");
-    }
-    
-    @Test
-    public void testLixisenatide2Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient15", 2, 25, 23, 4, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Lixisenatide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testLixisenatide2Rule is correct.");
-    }
-    
-    @Test
-    public void testSemaglutide1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient16", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Semaglutide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testSemaglutide1Rule is correct.");
-    }
-    
-    @Test
-    public void testSemaglutide2Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient17", 2, 25, 23, 4, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Semaglutide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testSemaglutide2Rule is correct.");
-    }
-    
-    @Test
-    public void testBexagliflozin1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient18", 2, 25, 23, 4, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Bexagliflozin", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testBexagliflozin1Rule is correct.");
-    }
-    
-    @Test
-    public void testCanagliflozin1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient19", 2, 25, 23, 4, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Canagliflozin", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testCanagliflozin1Rule is correct.");
-    }
-    
-    @Test
-    public void testDapagliflozin1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient20", 2, 25, 23, 4, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Dapagliflozin", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testDapagliflozin1Rule is correct.");
-    }
-    
-    @Test
-    public void testGlimepiride1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient21", 2, 25, 23, 2, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Glimepiride", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testGlimepiride1Rule is correct.");
-    }
-    
-    @Test
-    public void testGlimepiride2Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient22", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Glimepiride", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testGlimepiride2Rule is correct.");
-    }
-    
-    @Test
-    public void testGlipizide1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient23", 2, 25, 23, 2, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Glipizide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testGlipizide1Rule is correct.");
-    }
-    
-    @Test
-    public void testGlipizide2Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient24", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Glipizide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testGlipizide2Rule is correct.");
-    }
-    
-    @Test
-    public void testGlyburide1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient25", 2, 25, 23, 2, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Glyburide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testGlyburide1Rule is correct.");
-    }
-    
-    @Test
-    public void testGlyburide2Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient26", 2, 25, 23, 3, false, false, true, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Glyburide", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testGlyburide2Rule is correct.");
-    }
-    
-    @Test
-    public void testRosiglitazone1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient27", 2, 24, 23, 4, false, false, false, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Rosiglitazone", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testRosiglitazone1Rule is correct.");
-    }
-    
-    @Test
-    public void testPioglitazone1Rule() {
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        Patient patient = new Patient("Patient28", 2, 24, 23, 4, false, false, false, true, false, false);
-        ksession.insert(patient);
-        int firedRules = ksession.fireAllRules();
-        ksession.dispose();
-
-        assertEquals(1, firedRules);
-        assertEquals(1, patient.getTreatments().size());
-        assertEquals("Pioglitazone", patient.getTreatments().iterator().next().getName());
-        
-        System.out.println("Test testPioglitazone1Rule is correct.");
+        System.out.println("Test testPatient8Rule is correct.");
     }
 }

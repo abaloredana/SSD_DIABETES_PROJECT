@@ -182,7 +182,7 @@ rule "Dapagliflozin"
     when
     $patient : Patient(typeOfDiabetes == 2, insulinProd == 4, bmi >= 18.5, age >= 18)
     then
-        $patient.applyTreatment("Bexagliflozin", true, 100.0);
+        $patient.applyTreatment("Dapagliflozin", true, 100.0);
         System.out.println("RULE 20 APPLIED");
 end
 
