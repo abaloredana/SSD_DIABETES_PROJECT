@@ -138,7 +138,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Sitagliptin", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testSitagliptin1Rule is correct.");
     }
@@ -156,7 +156,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Saxagliptin", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testSaxagliptin1Rule is correct.");
     }
@@ -174,7 +174,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Linagliptin", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testLinagliptin1Rule is correct.");
     }
@@ -192,7 +192,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Dulaglutide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testDulaglutide1Rule is correct.");
     }
@@ -210,7 +210,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Dulaglutide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testDulaglutide2Rule is correct.");
     }
@@ -228,7 +228,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Exenatide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testExenatide1Rule is correct.");
     }
@@ -246,7 +246,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Exenatide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testExenatide2Rule is correct.");
     }
@@ -264,7 +264,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Lixisenatide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testLixisenatide1Rule is correct.");
     }
@@ -282,7 +282,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Lixisenatide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testLixisenatide2Rule is correct.");
     }
@@ -300,7 +300,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Semaglutide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testSemaglutide1Rule is correct.");
     }
@@ -318,7 +318,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Semaglutide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testSemaglutide2Rule is correct.");
     }
@@ -336,7 +336,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Bexagliflozin", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testBexagliflozin1Rule is correct.");
     }
@@ -354,7 +354,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Canagliflozin", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testCanagliflozin1Rule is correct.");
     }
@@ -372,7 +372,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Dapagliflozin", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testDapagliflozin1Rule is correct.");
     }
@@ -390,7 +390,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Glimepiride", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testGlimepiride1Rule is correct.");
     }
@@ -408,7 +408,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Glimepiride", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testGlimepiride2Rule is correct.");
     }
@@ -426,7 +426,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Glipizide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testGlipizide1Rule is correct.");
     }
@@ -444,7 +444,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Glipizide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testGlipizide2Rule is correct.");
     }
@@ -462,7 +462,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Glyburide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testGlyburide1Rule is correct.");
     }
@@ -480,7 +480,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Glyburide", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testGlyburide2Rule is correct.");
     }
@@ -498,7 +498,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Rosiglitazone", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testRosiglitazone1Rule is correct.");
     }
@@ -516,7 +516,7 @@ public class PatientTest {
 
         assertEquals(1, firedRules);
         assertEquals(1, patient.getTreatments().size());
-        assertEquals("Metformin", patient.getTreatments().iterator().next().getName());
+        assertEquals("Pioglitazone", patient.getTreatments().iterator().next().getName());
         
         System.out.println("Test testPioglitazone1Rule is correct.");
     }
