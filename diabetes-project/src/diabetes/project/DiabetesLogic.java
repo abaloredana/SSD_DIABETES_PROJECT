@@ -4,10 +4,12 @@
  */
 package diabetes.project;
 
+import java.util.Set;
 import static org.apache.tools.ant.dispatch.DispatchUtils.execute;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+
 
 
 public class DiabetesLogic {
@@ -19,6 +21,7 @@ public class DiabetesLogic {
       KieServices ks = KieServices.Factory.get();
       KieContainer kc = ks.getKieClasspathContainer();
       execute(ks, kc); // This calls your custom execute method
+      
   }
 
     public static void execute(KieServices ks, KieContainer kc) {
@@ -33,19 +36,24 @@ public class DiabetesLogic {
         // KieRuntimeLogger logger = ks.getLoggers().newThreadedFileLogger( ksession, "./helloworld", 1000 );
         // The application can insert facts into the session
       
+        Set<Patient> patients = DiabetesInterface.menu();
+        
+        for(Patient patient : patients){
+            ksession.insert(patient);
+        }
+        System.out.println(DiabetesInterface.patients);
+        System.out.println(patients);
+   
+        
+        //Patient loredana = new Patient("Lore", 1, 26.8, 23, 1 , false, false, true, true, false, false);
         
         
-        Patient loredana = new Patient("Lore", 1, 26.8, 23, 1 , false, false, true, true, false, false);
         
         
-        
-        ksession.insert(loredana);
 
         // and fire the rules
         ksession.fireAllRules();
         
-    
-        System.out.println(loredana);
 
 
         // and then dispose the session

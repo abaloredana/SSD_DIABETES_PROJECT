@@ -26,7 +26,7 @@ public class Patient {
     private boolean pad;
     private boolean nafld;
     private boolean osteoporosis;
-    private Set<Treatment> treatments = new HashSet<>();
+    public Set<Treatment> treatments = new HashSet<>();
 
     @Override
     public String toString() {
