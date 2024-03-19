@@ -41,20 +41,14 @@ public class DiabetesLogic {
         for(Patient patient : patients){
             ksession.insert(patient);
         }
-        System.out.println(DiabetesInterface.patients);
-        System.out.println(patients);
-   
         
         //Patient loredana = new Patient("Lore", 1, 26.8, 23, 1 , false, false, true, true, false, false);
         
-        
-        
-        
-
+       
         // and fire the rules
         ksession.fireAllRules();
+        
         System.out.println(patients);
-
 
         // and then dispose the session
         ksession.dispose();
