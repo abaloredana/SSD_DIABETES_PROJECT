@@ -53,7 +53,7 @@ public class DiabetesLogic {
 
         // and fire the rules
         ksession.fireAllRules();
-        
+        System.out.println(patients);
 
 
         // and then dispose the session
