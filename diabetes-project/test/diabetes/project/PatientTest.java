@@ -37,11 +37,11 @@ public class PatientTest {
     }
 
     @Test
-    public void testPatient2InsulinRule() {
+    public void testPatient2InsulinRule() {  
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
-
+      
         Patient patient = new Patient("Patient2", 1, 25, 23, 2, false, false, true, true, false, false);
         ksession.insert(patient);
         int firedRules = ksession.fireAllRules();
@@ -118,7 +118,7 @@ public class PatientTest {
     }
 
     @Test
-    public void testPatient6Rule() {
+    public void testPatient6Rule() { 
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession ksession = kc.newKieSession("diabetesSession");
@@ -185,4 +185,29 @@ public class PatientTest {
         
         System.out.println("Test testPatient8Rule is correct.");
     }
+    
+     @Test
+    public void testPatient9Rule() {
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kc = ks.getKieClasspathContainer();
+        KieSession ksession = kc.newKieSession("diabetesSession");
+
+        Patient patient = new Patient("Patient9", 2, 24, 23, 4, true, false, false, true, true, true);
+        ksession.insert(patient);
+        int firedRules = ksession.fireAllRules();
+        ksession.dispose();
+
+        assertEquals(7, firedRules);
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Metformin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Dulaglutide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Exenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Lixisenatide")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Bexagliflozin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Canagliflozin")));
+        assertTrue(patient.getTreatments().stream().anyMatch(t -> t.getName().equals("Dapagliflozin")));
+        
+        System.out.println("Test testPatient9Rule is correct.");
+    }
+    
+    
 }

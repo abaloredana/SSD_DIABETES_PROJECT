@@ -22,8 +22,9 @@ public static Set<Patient> menu(){
         while (true) {
             System.out.println("\nDiabetes Management System");
             System.out.println("1. Add Patient");
-            System.out.println("2. List Patients and Treatments");
-            System.out.println("3. Continue to evaluation.");
+            System.out.println("2. Continue to evaluation.");
+            System.out.println("3. Exit.");
+            
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -34,12 +35,12 @@ public static Set<Patient> menu(){
                     addNewPatient(scanner);
                     break;
                 case 2:
-                    listPatients();
-                    break;
-                case 3:
-                    System.out.println("Continuing to evaluation...");
-                    //System.exit(0);
+                    System.out.println("Evaluating possible treatments.");
                     return patients;
+                    
+                case 3:
+                    System.exit(0);
+                    
                     
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -145,6 +146,39 @@ private static boolean promptYesNo(String message) {
             }
         }
     }
+    public static Doctor promptForDoctorCredentials(){
+        
+        System.out.println("Input your username:\n");
+        String username = scanner.nextLine();
+        System.out.println("Input yor password:\n");
+        String password = scanner.nextLine();
+        
+        return new Doctor(username, password);
+    }
+    public static int firstPrompt(){
+        System.out.println("Welcome to our DSS!\n");
+        System.out.println("1.Sing up\n");
+        System.out.println("2.Login \n");
+        int option = scanner.nextInt();
+        return option;
+    }
+    
+    public static boolean logIn(Doctor doctor) {
+        try {
+            
+            String inputPasswordHash = Doctor.hashPassword(doctor.passwordHash);
 
+            if (doctor.getUsername().equals(doctor.username) && doctor.getPasswordHash().equals(inputPasswordHash)) {
+                System.out.println("Login successful");
+                return true;
+            } else {
+                System.out.println("Login failed");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Login error: " + e.getMessage());
+            return false;
+        }
+    }
 }
 

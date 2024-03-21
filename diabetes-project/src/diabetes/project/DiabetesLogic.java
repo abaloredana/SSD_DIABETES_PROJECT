@@ -18,9 +18,12 @@ public class DiabetesLogic {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+      //boolean authorized = DiabetesInterface.logIn(DiabetesInterface.promptForDoctorCredentials());
+     // if (authorized){
       KieServices ks = KieServices.Factory.get();
       KieContainer kc = ks.getKieClasspathContainer();
       execute(ks, kc); // This calls your custom execute method
+      //}
       
   }
 
@@ -38,6 +41,7 @@ public class DiabetesLogic {
       
         Set<Patient> patients = DiabetesInterface.menu();
         
+        
         for(Patient patient : patients){
             ksession.insert(patient);
         }
@@ -49,6 +53,7 @@ public class DiabetesLogic {
         ksession.fireAllRules();
         
         System.out.println(patients);
+       
 
         // and then dispose the session
         ksession.dispose();
