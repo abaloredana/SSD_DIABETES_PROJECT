@@ -9,12 +9,17 @@ package diabetes.project;
  * @author loredana
  */
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 public class DiabetesInterface {
 
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_RESET = "\u001B[0m";
     public static Set<Patient> patients = new HashSet<>();
     private static Scanner scanner = new Scanner(System.in);
 public static Set<Patient> menu(){
@@ -146,6 +151,7 @@ private static boolean promptYesNo(String message) {
             }
         }
     }
+ // DOCTOR METHODS 
     public static Doctor promptForDoctorCredentials(){
         
         System.out.println("Input your username:\n");
@@ -155,6 +161,7 @@ private static boolean promptYesNo(String message) {
         
         return new Doctor(username, password);
     }
+    // TODO Integrate this in the main
     public static int firstPrompt(){
         System.out.println("Welcome to our DSS!\n");
         System.out.println("1.Sing up\n");
@@ -166,13 +173,13 @@ private static boolean promptYesNo(String message) {
     public static boolean logIn(Doctor doctor) {
         try {
             
-            String inputPasswordHash = Doctor.hashPassword(doctor.passwordHash);
+            String inputPasswordHash = doctor.password;
 
-            if (doctor.getUsername().equals(doctor.username) && doctor.getPasswordHash().equals(inputPasswordHash)) {
-                System.out.println("Login successful");
+            if (doctor.getUsername().equals(doctor.username) && doctor.hashPassword("a").equals(inputPasswordHash)) {
+                System.out.println(ANSI_GREEN + "Login successful" + ANSI_RESET);
                 return true;
             } else {
-                System.out.println("Login failed");
+                System.out.println(ANSI_RED + "Login failed" + ANSI_RESET);
                 return false;
             }
         } catch (Exception e) {
@@ -180,5 +187,6 @@ private static boolean promptYesNo(String message) {
             return false;
         }
     }
+     
 }
 

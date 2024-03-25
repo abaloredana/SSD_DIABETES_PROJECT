@@ -13,17 +13,16 @@ import org.kie.api.runtime.KieSession;
 
 
 public class DiabetesLogic {
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-      //boolean authorized = DiabetesInterface.logIn(DiabetesInterface.promptForDoctorCredentials());
-     // if (authorized){
+     public static void main(String[] args) {
+     boolean authorized = DiabetesInterface.logIn(DiabetesInterface.promptForDoctorCredentials());
+     if (authorized){
       KieServices ks = KieServices.Factory.get();
       KieContainer kc = ks.getKieClasspathContainer();
       execute(ks, kc); // This calls your custom execute method
-      //}
+      }
       
   }
 
