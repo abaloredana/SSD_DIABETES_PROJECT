@@ -17,45 +17,16 @@ public class DiabetesLogic {
      * @param args the command line arguments
      */
      public static void main(String[] args) {
-     boolean authorized = DiabetesInterface.logIn(DiabetesInterface.promptForDoctorCredentials());
-     if (authorized){
-      KieServices ks = KieServices.Factory.get();
-      KieContainer kc = ks.getKieClasspathContainer();
-      execute(ks, kc); // This calls your custom execute method
+     int choice = 1;
+     switch(choice){
+         case 1:    
+            boolean authorized = DiabetesInterface.logIn(DiabetesInterface.promptForDoctorCredentials());
+            if (authorized){
+            DiabetesInterface.menu(); // This calls your custom execute method
       }
-      
+     }
+     
   }
-
-    public static void execute(KieServices ks, KieContainer kc) {
-        // From the container, a session is created based on
-        // its definition and configuration in the META-INF/kmodule.xml file
-        KieSession ksession = kc.newKieSession("diabetesSession");
-
-        // Once the session is created, the application can interact with it
-
-        // To set up a ThreadedFileLogger, so that the audit view reflects events whilst debugging,
-        // uncomment the next line
-        // KieRuntimeLogger logger = ks.getLoggers().newThreadedFileLogger( ksession, "./helloworld", 1000 );
-        // The application can insert facts into the session
-      
-        Set<Patient> patients = DiabetesInterface.menu();
-        
-        
-        for(Patient patient : patients){
-            ksession.insert(patient);
-        }
-        
-        //Patient loredana = new Patient("Lore", 1, 26.8, 23, 1 , false, false, true, true, false, false);
-        
-       
-        // and fire the rules
-        ksession.fireAllRules();
-        
-        System.out.println(patients);
-       
-
-        // and then dispose the session
-        ksession.dispose();
-    }
-    
 }
+
+    

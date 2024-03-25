@@ -14,6 +14,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 
 public class DiabetesInterface {
 
@@ -22,36 +25,38 @@ public class DiabetesInterface {
     private static final String ANSI_RESET = "\u001B[0m";
     public static Set<Patient> patients = new HashSet<>();
     private static Scanner scanner = new Scanner(System.in);
-public static Set<Patient> menu(){
-        
-        while (true) {
-            System.out.println("\nDiabetes Management System");
-            System.out.println("1. Add Patient");
-            System.out.println("2. Continue to evaluation.");
-            System.out.println("3. Exit.");
-            
-            System.out.print("Choose an option: ");
+    
+public static void menu() {
+    KieContext kieContext = null; // Initialize outside the loop to persist the context
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+    while (true) {
+        System.out.println("\nDiabetes Management System");
+        System.out.println("1. Add Patient");
+        System.out.println("2. Evaluate Patients.");
+        System.out.println("3. Exit.");
 
-            switch (choice) {
-                case 1:
-                    addNewPatient(scanner);
-                    break;
-                case 2:
-                    System.out.println("Evaluating possible treatments.");
-                    return patients;
-                    
-                case 3:
-                    System.exit(0);
-                    
-                    
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
+        System.out.print("Choose an option: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1:
+                addNewPatient(scanner);
+                break;
+            case 2:
+                if (kieContext == null) {
+                    kieContext = evaluatePatients(); // Only initialize if not already done
+                }
+                performEvaluation(kieContext); // This will handle the evaluation logic
+                break;
+            case 3:
+                System.exit(0);
+            default:
+                System.out.println("Invalid choice. Please try again.");
         }
+    }
 }
+
     
 
 private static Set<Patient> addNewPatient(Scanner scanner) {
@@ -175,7 +180,7 @@ private static boolean promptYesNo(String message) {
             
             String inputPasswordHash = doctor.password;
 
-            if (doctor.getUsername().equals(doctor.username) && doctor.hashPassword("a").equals(inputPasswordHash)) {
+            if (doctor.getUsername().equals(doctor.username) && Utils.hashPassword("a").equals(inputPasswordHash)) {
                 System.out.println(ANSI_GREEN + "Login successful" + ANSI_RESET);
                 return true;
             } else {
@@ -187,6 +192,30 @@ private static boolean promptYesNo(String message) {
             return false;
         }
     }
+    
+   public static KieContext evaluatePatients() {
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kc = ks.getKieClasspathContainer();
+        KieContext kieContext = new KieContext(ks,kc);
+        return kieContext;
+}
+   
+public static void performEvaluation(KieContext kieContext) {
+    KieSession ksession = kieContext.getKieContainer().newKieSession("diabetesSession");
+
+    // Insert patients into the session. This example assumes patients are accessible
+    for(Patient patient : patients) {
+        ksession.insert(patient);
+    }
+
+    ksession.fireAllRules();
+    ksession.dispose();
+    System.out.println(patients);
+    
+    // Optionally, print patients or results after evaluation
+    System.out.println("Evaluation completed.");
+}
+ 
      
 }
 
