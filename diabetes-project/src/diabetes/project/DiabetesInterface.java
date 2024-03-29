@@ -28,7 +28,7 @@ public class DiabetesInterface {
     
 public static void menu() {
     KieContext kieContext = null; // Initialize outside the loop to persist the context
-
+    //DBMannager.createTables();
     while (true) {
         System.out.println("\nDiabetes Management System");
         System.out.println("1. Add Patient");
@@ -100,7 +100,10 @@ private static Set<Patient> addNewPatient(Scanner scanner) {
 
     // Creating the patient object
     Patient patient = new Patient(name, typeOfDiabetes, bmi, age, insulinProd, insulinRes, hypotension, dyslipidemia, pad, nafld, osteoporosis);
+    
     patients.add(patient);
+    
+    DBMannager.insertPatient(patient.getName(), patient.getTypeOfDiabetes(), patient.getBmi(), patient.getAge(), patient.getInsulinProd(), patient.isInsulinRes(), patient.isHypotension(), patient.isDyslipidemia(), patient.isPad(), patient.isNafld(), patient.isOsteoporosis());
 
     System.out.println("Patient added successfully.");
 return patients;   
